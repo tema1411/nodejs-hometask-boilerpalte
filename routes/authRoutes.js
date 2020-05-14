@@ -6,8 +6,7 @@ const router = Router();
 
 router.post('/login', (req, res, next) => {
     try {
-        // TODO: Implement login action
-        res.data = data;
+        res.data = AuthService.login(req.body);
     } catch (err) {
         res.err = err;
     } finally {

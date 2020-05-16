@@ -51,6 +51,8 @@ router.delete('/:id', (req, res, next) => {
 }, responseMiddleware)
 
 router.post('/', trimObjValue, createUserValid, (req, res, next) => {
+    if (res.err) return next()
+
     try {
         res.data = UserService.create(req.body)
     } catch (e) {

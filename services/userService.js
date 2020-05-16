@@ -1,10 +1,6 @@
 const {UserRepository} = require('../repositories/userRepository');
 
 class UserService {
-
-    // TODO: Implement methods to work with user
-
-
     getOne(id) {
         const item = UserRepository.getOne({id});
         if (!item) {

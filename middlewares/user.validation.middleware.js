@@ -1,5 +1,6 @@
 const {user} = require('../models/user');
-const {ValidationUserField} = require('../validation/UserFieldValidation')
+const {ValidationUserField} = require('../validation/UserFieldValidation');
+const {validationAndGetValidDataForUpdate} = require('../validation/validationHelper');
 
 const createUserValid = (req, res, next) => {
     const validationFields = new ValidationUserField(res, next);
@@ -20,24 +21,9 @@ const createUserValid = (req, res, next) => {
 }
 
 const updateUserValid = (req, res, next) => {
-    // TODO: Implement validatior for user entity during update
     const validationFields = new ValidationUserField(res, next);
-    const dateToUpdate = req.body;
 
-    const newDataUser = {};
-
-    for (let key in dateToUpdate) {
-        if (key in user) {
-            const value = dateToUpdate[key];
-            newDataUser[key] = validationFields[key](value);
-
-            if (!newDataUser[key]) {
-                break;
-            }
-        }
-    }
-
-    req.body = newDataUser;
+    req.body = validationAndGetValidDataForUpdate(validationFields,  req.body, user);
     next();
 }
 

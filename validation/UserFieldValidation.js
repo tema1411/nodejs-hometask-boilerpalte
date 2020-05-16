@@ -1,4 +1,4 @@
-const {BaseValidationField} = require("./BaseValidation");
+const {BaseValidationField} = require("./validationHelper");
 
 class ValidationUserField extends BaseValidationField{
     constructor(res, next) {
